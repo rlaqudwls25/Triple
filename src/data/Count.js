@@ -2,17 +2,17 @@ export const COUNT_DATA = [
   {
     id: 1,
     title: '350만 명',
-    subtitle: '의 여행자',
+    subtitle: '의 사용자',
   },
   {
     id: 2,
     title: '21만 개',
-    subtitle: '의 여행 리뷰',
+    subtitle: '의 리뷰',
   },
   {
     id: 3,
     title: '650만 개',
-    subtitle: '의 여행 일정',
+    subtitle: '의 저장',
   },
 ];
 

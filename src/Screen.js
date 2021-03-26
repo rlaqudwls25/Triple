@@ -20,16 +20,16 @@ const useFadeIn = (duration = 0.7, delay = 1) => {
 };
 
 const Screen = ({ date = '2019년 2월 기준' }) => {
-  const fadeInH1 = useFadeIn(0.7, 1);
-  const fadeInP = useFadeIn(0.7, 2);
-  const fadeInC = useFadeIn(0.7, 3);
+  const fadeInOne = useFadeIn(0.7, 1);
+  const fadeInTwo = useFadeIn(0.7, 2);
+  const fadeInThree = useFadeIn(0.7, 3);
 
   return (
     <>
       <SectionContainer>
         <ContentWrapper>
-          <ImageCotent {...fadeInH1}>{date}</ImageCotent>
-          <TripContent {...fadeInP}>
+          <ImageCotent {...fadeInOne}>{date}</ImageCotent>
+          <TripContent {...fadeInTwo}>
             {COUNT_DATA.map((item, idx) => {
               return (
                 <TravlerContent key={idx} item={item}>
@@ -39,7 +39,7 @@ const Screen = ({ date = '2019년 2월 기준' }) => {
               );
             })}
           </TripContent>
-          <AwardWrapper {...fadeInC}>
+          <AwardWrapper {...fadeInThree}>
             {AWARD_DATA.map((item, idx) => {
               return (
                 <AwardYearItem key={idx} item={item}>
