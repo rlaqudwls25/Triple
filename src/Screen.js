@@ -1,9 +1,32 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mixin } from './styles/mixin';
 import { COUNT_DATA, AWARD_DATA } from './data/Count';
 
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    const tick = () => {
+      savedCallback.current();
+    };
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
+
 const Screen = ({ date = '2019년 2월 기준' }) => {
+  const [count, setCount] = useState(0);
+  useInterval(() => {
+    setCount(count + 1);
+  }, 20);
+
   const useFadeIn = (duration = 0.7, delay = 1) => {
     // if (typeof duration !== 'number' || typeof delay !== 'number') {
     //   return;
@@ -33,7 +56,10 @@ const Screen = ({ date = '2019년 2월 기준' }) => {
             {COUNT_DATA.map((item, idx) => {
               return (
                 <TravlerContent key={idx} item={item}>
-                  <Count>{item.title}</Count>
+                  <Count>
+                    {count < 350 && item.id === 1 ? count + 1 : '350'}
+                    {item.title}
+                  </Count>
                   <Trip>{item.subtitle}</Trip>
                 </TravlerContent>
               );
