@@ -3,23 +3,23 @@ import styled from 'styled-components';
 import { mixin } from './styles/mixin';
 import { COUNT_DATA, AWARD_DATA } from './data/Count';
 
-const useFadeIn = (duration = 0.7, delay = 1) => {
-  // if (typeof duration !== 'number' || typeof delay !== 'number') {
-  //   return;
-  // }
-  const element = useRef();
-  useEffect(() => {
-    if (element.current) {
-      const { current } = element;
-      current.style.transition = `opacity ${duration}s ease-in-out ${delay}s`;
-      current.style.opacity = 1;
-    }
-  }, []);
-
-  return { ref: element, style: { opacity: 0 } };
-};
-
 const Screen = ({ date = '2019년 2월 기준' }) => {
+  const useFadeIn = (duration = 0.7, delay = 1) => {
+    // if (typeof duration !== 'number' || typeof delay !== 'number') {
+    //   return;
+    // }
+    const element = useRef();
+    useEffect(() => {
+      if (element.current) {
+        const { current } = element;
+        current.style.transition = `opacity ${duration}s ease-in-out ${delay}s`;
+        current.style.opacity = 1;
+      }
+    }, []);
+
+    return { ref: element, style: { opacity: 0 } };
+  };
+
   const fadeInOne = useFadeIn(0.7, 1);
   const fadeInTwo = useFadeIn(0.7, 2);
   const fadeInThree = useFadeIn(0.7, 3);
