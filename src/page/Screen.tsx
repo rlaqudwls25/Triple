@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import TripSreen from '../components/TripSrceen';
-import AwardScreen from '../components/AwardScreen';
+import { TripScreen, ITripScreenProps } from '../components/TripScreen';
+import { AwardScreen, IAwardScreenProps } from '../components/AwardScreen';
 
-const Screen = () => {
-  console.log('Scrren');
+export interface IScreen extends ITripScreenProps, IAwardScreenProps {}
+
+const Screen = ({ date = '2019년 2월 기준' }) => {
   const useFadeIn = (duration = 0.7, delay = 1) => {
-    const element = useRef();
+    const element = useRef<any | null>(null);
     useEffect(() => {
       if (element.current) {
         const { current } = element;
@@ -25,7 +26,7 @@ const Screen = () => {
   return (
     <SectionContainer>
       <ContentWrapper>
-        <TripSreen fadeInOne={fadeInOne} fadeInTwo={fadeInTwo} />
+        <TripScreen fadeInOne={fadeInOne} fadeInTwo={fadeInTwo} date={date} />
         <AwardScreen fadeInThree={fadeInThree} />
       </ContentWrapper>
     </SectionContainer>

@@ -3,10 +3,17 @@ import styled from 'styled-components';
 import { mixin } from '../styles/mixin';
 import { AWARD_DATA } from '../data/Count';
 
-const AwardScreen = props => {
-  console.log('AwardScreen');
+export interface IAwardScreenProps {
+  fadeInThree: object;
+}
+
+export interface IAwardDataProps extends IAwardScreenProps {
+  id: number;
+}
+
+export const AwardScreen = ({ fadeInThree }: IAwardDataProps) => {
   return (
-    <AwardWrapper {...props.fadeInThree}>
+    <AwardWrapper {...fadeInThree}>
       {AWARD_DATA.map((item, idx) => {
         return (
           <AwardYearItem key={idx} item={item}>
@@ -20,12 +27,12 @@ const AwardScreen = props => {
   );
 };
 
-const AwardWrapper = styled.div`
-  ${mixin.flexSet('_', 'flex-start', 'center')};
+const AwardWrapper = styled.div<any>`
+  ${mixin.flexSet('flex-start', 'center')};
   ${mixin.marginSet(50, 0, 140, 623)}
 `;
 
-const AwardYearItem = styled.div`
+const AwardYearItem = styled.div<IAwardScreenProps>`
   height: 54px;
   margin-left: ${props => (props.item.id === 1 ? '' : '20px')};
   background-size: 54px 54px;
@@ -43,5 +50,3 @@ const AwardTitle = styled.span`
 `;
 
 const AwardContent = styled(AwardTitle)``;
-
-export default AwardScreen;

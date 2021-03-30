@@ -3,14 +3,23 @@ import styled from 'styled-components';
 import { mixin } from '../styles/mixin';
 import { COUNT_DATA } from '../data/Count';
 
-const TripSreen = props => {
-  console.log('TripScreen');
+export interface ITripScreenProps {
+  fadeInOne: object;
+  fadeInTwo: object;
+  date: string;
+}
+
+export const TripScreen = ({
+  fadeInOne,
+  fadeInTwo,
+  date,
+}: ITripScreenProps) => {
   let [userCount, setUserCount] = useState(0);
   let [reviewCount, setReviewCount] = useState(0);
   let [scheduleCount, setScheduleCount] = useState(0);
 
-  const useInterval = (callback, delay) => {
-    const savedCallback = useRef();
+  const useInterval = (callback: object, delay: number) => {
+    const savedCallback = useRef<any | null>(null);
 
     useEffect(() => {
       savedCallback.current = callback;
@@ -27,22 +36,22 @@ const TripSreen = props => {
     }, [delay]);
   };
   useInterval(() => {
-    setUserCount(userCount < 349 ? (userCount += 1) : 349);
-    setReviewCount(reviewCount + 1 < 20 ? (reviewCount += 1) : 20);
-    setScheduleCount(scheduleCount + 1 < 649 ? (scheduleCount += 1) : 649);
+    setUserCount(userCount < 350 ? (userCount += 1) : 350);
+    setReviewCount(reviewCount + 1 < 21 ? (reviewCount += 1) : 21);
+    setScheduleCount(scheduleCount + 1 < 650 ? (scheduleCount += 1) : 650);
   }, 10);
 
   return (
     <>
-      <ImageCotent {...props.fadeInOne}>{props.date}</ImageCotent>
-      <TripContent {...props.fadeInTwo}>
+      <ImageCotent {...fadeInOne}>{date}</ImageCotent>
+      <TripContent {...fadeInTwo}>
         {COUNT_DATA.map((item, idx) => {
           return (
-            <TravlerContent key={idx} item={item}>
+            <TravlerContent key={idx}>
               <Count>
-                {userCount && item.id === 1 ? userCount + 1 : ''}
-                {reviewCount && item.id === 2 ? reviewCount + 1 : ''}
-                {scheduleCount && item.id === 3 ? scheduleCount + 1 : ''}
+                {userCount && item.id === 1 ? userCount : ''}
+                {reviewCount && item.id === 2 ? reviewCount : ''}
+                {scheduleCount && item.id === 3 ? scheduleCount : ''}
                 {item.countTitle}
               </Count>
               <Trip>{item.countSubTitle}</Trip>
@@ -84,5 +93,3 @@ const Count = styled.strong`
 const Trip = styled.span`
   ${mixin.fontSet('#3A3A3A', '36px', '400')};
 `;
-
-export default TripSreen;
