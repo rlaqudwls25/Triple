@@ -4,20 +4,19 @@ import { mixin } from '../styles/mixin';
 import { AWARD_DATA } from '../data/Count';
 
 const AwardScreen = props => {
+  console.log('AwardScreen');
   return (
-    <>
-      <AwardWrapper {...props.fadeInThree}>
-        {AWARD_DATA.map((item, idx) => {
-          return (
-            <AwardYearItem key={idx} item={item}>
-              <AwardTitle>{item.awardtitle}</AwardTitle>
-              <br></br>
-              <AwardContent>{item.awardcontent}</AwardContent>
-            </AwardYearItem>
-          );
-        })}
-      </AwardWrapper>
-    </>
+    <AwardWrapper {...props.fadeInThree}>
+      {AWARD_DATA.map((item, idx) => {
+        return (
+          <AwardYearItem key={idx} item={item}>
+            <AwardTitle>{item.awardtitle}</AwardTitle>
+            <br />
+            <AwardContent>{item.awardcontent}</AwardContent>
+          </AwardYearItem>
+        );
+      })}
+    </AwardWrapper>
   );
 };
 

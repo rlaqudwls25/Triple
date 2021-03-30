@@ -4,7 +4,10 @@ import { mixin } from '../styles/mixin';
 import { COUNT_DATA } from '../data/Count';
 
 const TripSreen = props => {
-  const [userCount, userSetCount] = useState(0);
+  console.log('TripScreen');
+  let [userCount, setUserCount] = useState(0);
+  let [reviewCount, setReviewCount] = useState(0);
+  let [scheduleCount, setScheduleCount] = useState(0);
 
   const useInterval = (callback, delay) => {
     const savedCallback = useRef();
@@ -23,10 +26,11 @@ const TripSreen = props => {
       }
     }, [delay]);
   };
-
   useInterval(() => {
-    userSetCount(userCount + 1);
-  }, 20);
+    setUserCount(userCount < 349 ? (userCount += 1) : 349);
+    setReviewCount(reviewCount + 1 < 20 ? (reviewCount += 1) : 20);
+    setScheduleCount(scheduleCount + 1 < 649 ? (scheduleCount += 1) : 649);
+  }, 10);
 
   return (
     <>
@@ -36,7 +40,9 @@ const TripSreen = props => {
           return (
             <TravlerContent key={idx} item={item}>
               <Count>
-                {userCount < 350 && item.id === 1 ? userCount + 1 : '350'}
+                {userCount && item.id === 1 ? userCount + 1 : ''}
+                {reviewCount && item.id === 2 ? reviewCount + 1 : ''}
+                {scheduleCount && item.id === 3 ? scheduleCount + 1 : ''}
                 {item.countTitle}
               </Count>
               <Trip>{item.countSubTitle}</Trip>

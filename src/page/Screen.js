@@ -4,10 +4,8 @@ import TripSreen from '../components/TripSrceen';
 import AwardScreen from '../components/AwardScreen';
 
 const Screen = () => {
+  console.log('Scrren');
   const useFadeIn = (duration = 0.7, delay = 1) => {
-    // if (typeof duration !== 'number' || typeof delay !== 'number') {
-    //   return;
-    // }
     const element = useRef();
     useEffect(() => {
       if (element.current) {
@@ -15,7 +13,7 @@ const Screen = () => {
         current.style.transition = `opacity ${duration}s ease-in-out ${delay}s`;
         current.style.opacity = 1;
       }
-    }, []);
+    }, [duration, delay]);
 
     return { ref: element, style: { opacity: 0 } };
   };
