@@ -6,25 +6,21 @@ import { COUNT_DATA } from '../data/Count';
 export interface ITripScreenProps {
   fadeInOne: object;
   fadeInTwo: object;
-  date: string;
 }
 
-export const TripScreen = ({
-  fadeInOne,
-  fadeInTwo,
-  date,
-}: ITripScreenProps) => {
+export const TripScreen = ({ fadeInOne, fadeInTwo }: ITripScreenProps) => {
   let [userCount, setUserCount] = useState(0);
   let [reviewCount, setReviewCount] = useState(0);
   let [scheduleCount, setScheduleCount] = useState(0);
 
   const useInterval = (callback: object, delay: number) => {
-    const savedCallback = useRef<any | null>(null);
-
+    //useRef는 렌더 사이에서 공유되는 변환 가능한 current 프로퍼티를 가지는 순수한 객체를 반환하여 최근의 callback을 저장해놓을 수 있습니다.
+    const savedCallback = useRef<any | null>(null); //MutableRefObject 사용
+    //RefObject 변환해서 current가 readonly가 됨
+    //readonly면 current에 내용을 주입하는 용도로 useRef를 사용할 수 없다.
     useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
+      savedCallback.current = callback; //Error
+    });
     useEffect(() => {
       const tick = () => {
         savedCallback.current();
@@ -35,6 +31,7 @@ export const TripScreen = ({
       }
     }, [delay]);
   };
+
   useInterval(() => {
     setUserCount(userCount < 350 ? (userCount += 1) : 350);
     setReviewCount(reviewCount + 1 < 21 ? (reviewCount += 1) : 21);
@@ -43,7 +40,9 @@ export const TripScreen = ({
 
   return (
     <>
-      <ImageCotent {...fadeInOne}>{date}</ImageCotent>
+      <ImageCotent {...fadeInOne}>
+        {new Date().getFullYear()}년 {new Date().getMonth()}월 기준
+      </ImageCotent>
       <TripContent {...fadeInTwo}>
         {COUNT_DATA.map((item, idx) => {
           return (

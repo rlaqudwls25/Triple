@@ -5,16 +5,19 @@ import { AwardScreen, IAwardScreenProps } from '../components/AwardScreen';
 
 export interface IScreen extends ITripScreenProps, IAwardScreenProps {}
 
-const Screen = ({ date = '2019년 2월 기준' }) => {
+const Screen = () => {
   const useFadeIn = (duration = 0.7, delay = 1) => {
     const element = useRef<any | null>(null);
     useEffect(() => {
       if (element.current) {
         const { current } = element;
         current.style.transition = `opacity ${duration}s ease-in-out ${delay}s`;
+        // transition-duration : 트랜지션이 일어나는 지속 시간을 명시하는 속성
+        // transition-delay : 속성이 변하는 시점과 트랜지션이 실제로 시작하는 사이에 기다리는 시간
+
         current.style.opacity = 1;
       }
-    }, [duration, delay]);
+    }, [delay, duration]);
 
     return { ref: element, style: { opacity: 0 } };
   };
@@ -26,7 +29,7 @@ const Screen = ({ date = '2019년 2월 기준' }) => {
   return (
     <SectionContainer>
       <ContentWrapper>
-        <TripScreen fadeInOne={fadeInOne} fadeInTwo={fadeInTwo} date={date} />
+        <TripScreen fadeInOne={fadeInOne} fadeInTwo={fadeInTwo} />
         <AwardScreen fadeInThree={fadeInThree} />
       </ContentWrapper>
     </SectionContainer>

@@ -30,7 +30,7 @@ export const AwardScreen = ({ fadeInThree }: IAwardScreenProps) => {
   );
 };
 
-const AwardWrapper = styled.div<any>`
+const AwardWrapper = styled.div`
   ${mixin.flexSet('flex-start', 'center')};
   ${mixin.marginSet(50, 0, 140, 623)}
 `;
