@@ -17,9 +17,10 @@ export interface IAwardScreenProps {
 export const AwardScreen = ({ fadeInThree }: IAwardScreenProps) => {
   return (
     <AwardWrapper {...fadeInThree}>
-      {AWARD_DATA.map((item, idx) => {
+      {AWARD_DATA.map(item => {
+        const { id } = item;
         return (
-          <AwardYearItem key={idx} item={item}>
+          <AwardYearItem key={id} item={item}>
             <AwardTitle>{item.awardtitle}</AwardTitle>
             <br />
             <AwardContent>{item.awardcontent}</AwardContent>

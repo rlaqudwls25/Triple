@@ -44,9 +44,10 @@ export const TripScreen = ({ fadeInOne, fadeInTwo }: ITripScreenProps) => {
         {new Date().getFullYear()}년 {new Date().getMonth()}월 기준
       </ImageCotent>
       <TripContent {...fadeInTwo}>
-        {COUNT_DATA.map((item, idx) => {
+        {COUNT_DATA.map(item => {
+          const { id } = item;
           return (
-            <TravlerContent key={idx}>
+            <TravlerContent key={id}>
               <Count>
                 {userCount && item.id === 1
                   ? userCount
